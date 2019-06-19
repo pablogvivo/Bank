@@ -20,7 +20,6 @@ namespace Bank
         private void Form1_Load(object sender, EventArgs e)
         {
             BDCom t = new BDCom("localhost", "client_conn", "client", "tyu567");
-
         }
     }
 }

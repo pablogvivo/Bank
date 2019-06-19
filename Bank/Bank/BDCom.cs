@@ -89,13 +89,13 @@ namespace Bank
         }
 
         /// <summary>
-        /// 
+        /// create the user and the account
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="surname"></param>
-        /// <param name="telephone"></param>
-        /// <param name="email"></param>
-        /// <param name="iban"></param>
+        /// <param name="name">Name of the client</param>
+        /// <param name="surname">Surname of the client</param>
+        /// <param name="telephone">Telephone of the client</param>
+        /// <param name="email">Email of the client</param>
+        /// <param name="iban">IBAN of the account</param>
         public void createUser(String name, String surname, String telephone, String email, String iban)
         {
             try
@@ -109,19 +109,43 @@ namespace Bank
                 cmd.Parameters.AddWithValue("namecl", name);
                 cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("surname", surname);
-                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters["surname"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("telephone", telephone);
-                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters["telephone"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("email", email);
-                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters["email"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("iban", iban);
-                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters["iban"].Direction = System.Data.ParameterDirection.Input;
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 Close();
             }
             catch (Exception ex)
             {
                 errors.Add("Error creating user " + ex.ToString());
+
+            }
+        }
+        
+        public void deposit(String Iban, float money)
+        {
+            try
+            {
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "deposit";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("ibannum", Iban);
+                cmd.Parameters["ibannum"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("depmoney", money);
+                cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error making deposit " + ex.ToString());
 
             }
         }
