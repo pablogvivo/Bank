@@ -60,6 +60,7 @@
             this.lblIBANSend = new System.Windows.Forms.Label();
             this.txtIBANSend = new System.Windows.Forms.TextBox();
             this.txtError = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,6 +69,7 @@
             this.tbCreate.SuspendLayout();
             this.tbDeposit.SuspendLayout();
             this.tbTransfer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -78,6 +80,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel1.Controls.Add(this.btTransfer);
             this.splitContainer1.Panel1.Controls.Add(this.btDeposit);
             this.splitContainer1.Panel1.Controls.Add(this.btCreateClient);
@@ -229,6 +232,7 @@
             this.txtIBAN.Name = "txtIBAN";
             this.txtIBAN.Size = new System.Drawing.Size(363, 26);
             this.txtIBAN.TabIndex = 4;
+            this.txtIBAN.TextChanged += new System.EventHandler(this.TxtIBAN_TextChanged);
             // 
             // txtEmail
             // 
@@ -236,6 +240,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(363, 26);
             this.txtEmail.TabIndex = 3;
+            this.txtEmail.TextChanged += new System.EventHandler(this.TxtEmail_TextChanged);
             // 
             // txtTelephone
             // 
@@ -250,6 +255,7 @@
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(363, 26);
             this.txtSurname.TabIndex = 1;
+            this.txtSurname.TextChanged += new System.EventHandler(this.TxtSurname_TextChanged);
             // 
             // txtName
             // 
@@ -257,6 +263,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(363, 26);
             this.txtName.TabIndex = 0;
+            this.txtName.TextChanged += new System.EventHandler(this.TxtName_TextChanged);
             // 
             // tbDeposit
             // 
@@ -307,6 +314,7 @@
             this.txtDepMoney.Name = "txtDepMoney";
             this.txtDepMoney.Size = new System.Drawing.Size(363, 26);
             this.txtDepMoney.TabIndex = 1;
+            this.txtDepMoney.TextChanged += new System.EventHandler(this.TxtDepMoney_TextChanged);
             // 
             // txtDepIBAN
             // 
@@ -314,6 +322,7 @@
             this.txtDepIBAN.Name = "txtDepIBAN";
             this.txtDepIBAN.Size = new System.Drawing.Size(363, 26);
             this.txtDepIBAN.TabIndex = 0;
+            this.txtDepIBAN.TextChanged += new System.EventHandler(this.TxtDepIBAN_TextChanged);
             // 
             // tbTransfer
             // 
@@ -356,6 +365,7 @@
             this.txtTransMoney.Name = "txtTransMoney";
             this.txtTransMoney.Size = new System.Drawing.Size(363, 26);
             this.txtTransMoney.TabIndex = 4;
+            this.txtTransMoney.TextChanged += new System.EventHandler(this.TxtTransMoney_TextChanged);
             // 
             // lblIBANRecv
             // 
@@ -372,6 +382,7 @@
             this.txtIBANRecv.Name = "txtIBANRecv";
             this.txtIBANRecv.Size = new System.Drawing.Size(363, 26);
             this.txtIBANRecv.TabIndex = 2;
+            this.txtIBANRecv.TextChanged += new System.EventHandler(this.TxtIBANRecv_TextChanged);
             // 
             // lblIBANSend
             // 
@@ -388,6 +399,7 @@
             this.txtIBANSend.Name = "txtIBANSend";
             this.txtIBANSend.Size = new System.Drawing.Size(363, 26);
             this.txtIBANSend.TabIndex = 0;
+            this.txtIBANSend.TextChanged += new System.EventHandler(this.TxtIBANSend_TextChanged);
             // 
             // txtError
             // 
@@ -397,8 +409,21 @@
             this.txtError.ForeColor = System.Drawing.Color.IndianRed;
             this.txtError.Location = new System.Drawing.Point(0, 345);
             this.txtError.Name = "txtError";
+            this.txtError.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtError.Size = new System.Drawing.Size(723, 26);
             this.txtError.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox1.Image = global::Bank.Properties.Resources.Logo_green;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 251);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
+            this.pictureBox1.Size = new System.Drawing.Size(153, 120);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // Main
             // 
@@ -425,6 +450,7 @@
             this.tbDeposit.PerformLayout();
             this.tbTransfer.ResumeLayout(false);
             this.tbTransfer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,6 +490,7 @@
         private System.Windows.Forms.TextBox txtIBANRecv;
         private System.Windows.Forms.Label lblIBANSend;
         private System.Windows.Forms.TextBox txtIBANSend;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

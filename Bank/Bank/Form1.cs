@@ -52,7 +52,13 @@ namespace Bank
         #region Button BBDD
         private void BtTransferMake_Click(object sender, EventArgs e)
         {
-            BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, float.Parse(txtTransMoney.Text)) ;
+            txtError.Text = "";
+            float tempfloat = Utils.fNumber(txtTransMoney.Text);
+            if ( tempfloat != 0)
+
+                BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, tempfloat);
+            else
+                txtError.Text = "Money format incorrect or equal to zero";
         }
         private void BtDepMake_Click(object sender, EventArgs e)
         {
@@ -63,6 +69,81 @@ namespace Bank
         {
             BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text);
         }
+
+        #endregion
+
+        #region CheckText
+        private void TxtIBAN_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text ="";
+            if (!Utils.IBANCheck(txtIBAN.Text)) {
+                txtError.Text = "ERROR IN THE IBAN";
+            }  
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            if (!Utils.justLetter(txtName.Text))
+                txtError.Text = "ERROR IN NAME";
+        }
+
+        private void TxtSurname_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            if (!Utils.justLetter(txtSurname.Text))
+                txtError.Text = "ERROR IN SURNAME";
+        }
+        private void TxtEmail_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            if (!Utils.emailCheck(txtEmail.Text))
+                txtError.Text = "ERROR IN EMAIL";
+        }
+
+        private void TxtDepIBAN_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            if (!Utils.IBANCheck(txtDepIBAN.Text))
+            {
+                txtError.Text = "ERROR IN DEPOSIT IBAN";
+            }
+        }
+
+        private void TxtDepMoney_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            float tempfloat = Utils.fNumber(txtDepMoney.Text);
+            if (tempfloat == 0)
+                txtError.Text = "Money format incorrect or equal to zero";
+        }
+
+        private void TxtIBANSend_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            if (!Utils.IBANCheck(txtIBANSend.Text))
+            {
+                txtError.Text = "ERROR IN THE SEND IBAN";
+            }
+        }
+
+        private void TxtIBANRecv_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            if (!Utils.IBANCheck(txtIBANRecv.Text))
+            {
+                txtError.Text = "ERROR IN THE RECEIVE IBAN";
+            }
+        }
+
+        private void TxtTransMoney_TextChanged(object sender, EventArgs e)
+        {
+            txtError.Text = "";
+            float tempfloat = Utils.fNumber(txtTransMoney.Text);
+            if (tempfloat == 0)
+                txtError.Text = "Money format incorrect or equal to zero";
+        }
+
         #endregion
 
 
