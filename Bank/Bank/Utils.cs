@@ -20,7 +20,7 @@ namespace Bank
             {
 
                 float temp=0;
-                float.TryParse(input.Replace(",","."), out temp); //Format the  
+                float.TryParse(input.Replace(".",","), out temp); //Format the  
                 return temp;
             }
             catch (Exception ex) {

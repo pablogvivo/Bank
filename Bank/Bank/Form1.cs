@@ -60,7 +60,7 @@ namespace Bank
             txtError.Text = "";
             if (TransGood == 0) {
                 if (Utils.notEmptyTextBox(tbTransfer.Controls)) {
-                    if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, float.Parse(txtDepMoney.Text)))
+                    if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, Utils.fNumber(txtTransMoney.Text)))
                     {
                         txtError.Text = BBDD.Errors[BBDD.Errors.Count];
                         BBDD.ClearErrors = true;
@@ -77,12 +77,14 @@ namespace Bank
         {
             txtError.Text = "";
             if (DepoGood == 0) {
-                if (Utils.notEmptyTextBox(tbDeposit.Controls))
-                    if (!BBDD.deposit(txtDepIBAN.Text, float.Parse(txtDepMoney.Text))) {
+                if (Utils.notEmptyTextBox(tbDeposit.Controls)) {
+                    if (!BBDD.deposit(txtDepIBAN.Text, Utils.fNumber(txtDepMoney.Text)))
+                    {
                         txtError.Text = BBDD.Errors[BBDD.Errors.Count];
                         BBDD.ClearErrors = true;
                     }
-                    else
+                }
+                else
                         txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
             }
             else
@@ -95,13 +97,14 @@ namespace Bank
         {
             txtError.Text = "";
             if (CreateGood == 0) {
-                if (Utils.notEmptyTextBox(tbCreate.Controls))
-                    if (!BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text)){
+                if (Utils.notEmptyTextBox(tbCreate.Controls)) {
+                    if (!BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text))
+                    {
                         txtError.Text = BBDD.Errors[BBDD.Errors.Count];
-                        BBDD.ClearErrors=true;
+                        BBDD.ClearErrors = true;
                     }
-                        
-                    else
+                }
+                else
                     txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
             }
             else
