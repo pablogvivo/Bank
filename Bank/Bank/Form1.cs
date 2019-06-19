@@ -62,8 +62,15 @@ namespace Bank
                 if (Utils.notEmptyTextBox(tbTransfer.Controls)) {
                     if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, Utils.fNumber(txtTransMoney.Text)))
                     {
-                        txtError.Text = BBDD.Errors[BBDD.Errors.Count];
-                        BBDD.ClearErrors = true;
+                        if (BBDD.Errors.Count > 0) {
+                            txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                            BBDD.ClearErrors = true;
+                        }
+                    }
+                    else
+                    {
+                        Utils.resetTextbox(tbTransfer.Controls);
+                        txtError.Text = "DONE";
                     }
                 }
                 else
@@ -83,6 +90,11 @@ namespace Bank
                         txtError.Text = BBDD.Errors[BBDD.Errors.Count];
                         BBDD.ClearErrors = true;
                     }
+                    else {
+                        Utils.resetTextbox(tbDeposit.Controls);
+                        txtError.Text = "DONE";
+                    }
+                        
                 }
                 else
                         txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
@@ -102,6 +114,11 @@ namespace Bank
                     {
                         txtError.Text = BBDD.Errors[BBDD.Errors.Count];
                         BBDD.ClearErrors = true;
+                    }
+                    else
+                    {
+                        Utils.resetTextbox(tbCreate.Controls);
+                        txtError.Text = "DONE";
                     }
                 }
                 else

@@ -113,5 +113,15 @@ namespace Bank
                 return false;
             }
         }
+
+        public static void resetTextbox(Control.ControlCollection Father) {
+            try
+            {
+                Father.OfType<TextBox>().ToList().ForEach(t => t.Clear());
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }

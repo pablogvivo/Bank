@@ -142,6 +142,7 @@ namespace Bank
         {
             try
             {
+                bool result = false;
                 Connect();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = connection;
@@ -152,9 +153,12 @@ namespace Bank
                 cmd.Parameters["ibannum"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("depmoney", money);
                 cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("result", result);
+                cmd.Parameters["result"].Direction = System.Data.ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
                 Close();
-                return true;
+                result = Convert.ToBoolean(cmd.Parameters["result"].Value);
+                return result;
             }
             catch (Exception ex)
             {
@@ -173,6 +177,7 @@ namespace Bank
         {
             try
             {
+                bool result = false;
                 Connect();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = connection;
@@ -185,9 +190,12 @@ namespace Bank
                 cmd.Parameters["ibanRecv"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("depmoney", money);
                 cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("result", result);
+                cmd.Parameters["result"].Direction = System.Data.ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
-                Close(); 
-                return true;
+                Close();
+                result = Convert.ToBoolean(cmd.Parameters["result"].Value);
+                return result;
             }
             catch (Exception ex)
             {
