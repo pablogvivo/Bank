@@ -10,9 +10,10 @@ using System.Windows.Forms;
 
 namespace Bank
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        private byte _selectButton=0;
+        public Main()
         {
             InitializeComponent();
         }
@@ -20,6 +21,30 @@ namespace Bank
         private void Form1_Load(object sender, EventArgs e)
         {
             BDCom t = new BDCom("localhost", "client_conn", "client", "tyu567");
+            btCreateClient.BackColor = Color.LawnGreen;
         }
+        #region Button
+        private void BtDeposit_Click(object sender, EventArgs e)
+        {
+            btTransfer.BackColor = btCreateClient.BackColor = Color.LightGray;
+            btDeposit.BackColor = Color.LawnGreen;
+            tbMain.SelectedTab = tbDeposit;
+
+        }
+        private void BtCreateClient_Click(object sender, EventArgs e)
+        {
+            btTransfer.BackColor = btDeposit.BackColor =  Color.LightGray;
+            btCreateClient.BackColor = Color.LawnGreen;
+            tbMain.SelectedTab = tbCreate;
+        }
+
+        private void BtTransfer_Click(object sender, EventArgs e)
+        {
+            btDeposit.BackColor = btCreateClient.BackColor = Color.LightGray;
+            btTransfer.BackColor = Color.LawnGreen;
+            tbMain.SelectedTab = tbTransfer;
+        }
+        #endregion
+
     }
 }
