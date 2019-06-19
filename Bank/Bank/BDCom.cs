@@ -88,6 +88,43 @@ namespace Bank
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="telephone"></param>
+        /// <param name="email"></param>
+        /// <param name="iban"></param>
+        public void createUser(String name, String surname, String telephone, String email, String iban)
+        {
+            try
+            {
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "wrtclient";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("namecl", name);
+                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("surname", surname);
+                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("telephone", telephone);
+                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("email", email);
+                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("iban", iban);
+                cmd.Parameters["namecl"].Direction = System.Data.ParameterDirection.Input;
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error creating user " + ex.ToString());
+
+            }
+        }
 
         #endregion
     }
