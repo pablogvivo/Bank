@@ -54,7 +54,7 @@
             this.tbTransfer = new System.Windows.Forms.TabPage();
             this.btTransferMake = new System.Windows.Forms.Button();
             this.lblTransMoney = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtTransMoney = new System.Windows.Forms.TextBox();
             this.lblIBANRecv = new System.Windows.Forms.Label();
             this.txtIBANRecv = new System.Windows.Forms.TextBox();
             this.lblIBANSend = new System.Windows.Forms.Label();
@@ -72,6 +72,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -86,8 +87,8 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel2.Controls.Add(this.tbMain);
             this.splitContainer1.Panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.splitContainer1.Size = new System.Drawing.Size(711, 322);
-            this.splitContainer1.SplitterDistance = 151;
+            this.splitContainer1.Size = new System.Drawing.Size(723, 371);
+            this.splitContainer1.SplitterDistance = 153;
             this.splitContainer1.TabIndex = 0;
             // 
             // btTransfer
@@ -98,7 +99,7 @@
             this.btTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btTransfer.Location = new System.Drawing.Point(0, 130);
             this.btTransfer.Name = "btTransfer";
-            this.btTransfer.Size = new System.Drawing.Size(151, 65);
+            this.btTransfer.Size = new System.Drawing.Size(153, 65);
             this.btTransfer.TabIndex = 2;
             this.btTransfer.Text = "TRANSFER";
             this.btTransfer.UseVisualStyleBackColor = false;
@@ -112,7 +113,7 @@
             this.btDeposit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDeposit.Location = new System.Drawing.Point(0, 65);
             this.btDeposit.Name = "btDeposit";
-            this.btDeposit.Size = new System.Drawing.Size(151, 65);
+            this.btDeposit.Size = new System.Drawing.Size(153, 65);
             this.btDeposit.TabIndex = 1;
             this.btDeposit.Text = "DEPOSIT";
             this.btDeposit.UseVisualStyleBackColor = false;
@@ -126,7 +127,7 @@
             this.btCreateClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCreateClient.Location = new System.Drawing.Point(0, 0);
             this.btCreateClient.Name = "btCreateClient";
-            this.btCreateClient.Size = new System.Drawing.Size(151, 65);
+            this.btCreateClient.Size = new System.Drawing.Size(153, 65);
             this.btCreateClient.TabIndex = 0;
             this.btCreateClient.Text = "CREATE CLIENT";
             this.btCreateClient.UseVisualStyleBackColor = false;
@@ -143,7 +144,7 @@
             this.tbMain.Location = new System.Drawing.Point(0, 0);
             this.tbMain.Name = "tbMain";
             this.tbMain.SelectedIndex = 0;
-            this.tbMain.Size = new System.Drawing.Size(556, 322);
+            this.tbMain.Size = new System.Drawing.Size(566, 371);
             this.tbMain.TabIndex = 0;
             // 
             // tbCreate
@@ -163,7 +164,7 @@
             this.tbCreate.Location = new System.Drawing.Point(4, 5);
             this.tbCreate.Name = "tbCreate";
             this.tbCreate.Padding = new System.Windows.Forms.Padding(3);
-            this.tbCreate.Size = new System.Drawing.Size(548, 313);
+            this.tbCreate.Size = new System.Drawing.Size(558, 362);
             this.tbCreate.TabIndex = 0;
             this.tbCreate.Text = "tabPage1";
             // 
@@ -175,6 +176,7 @@
             this.btCreateMake.TabIndex = 10;
             this.btCreateMake.Text = "CREATE";
             this.btCreateMake.UseVisualStyleBackColor = true;
+            this.btCreateMake.Click += new System.EventHandler(this.BtCreateMake_Click);
             // 
             // lblIBAN
             // 
@@ -267,7 +269,7 @@
             this.tbDeposit.Location = new System.Drawing.Point(4, 5);
             this.tbDeposit.Name = "tbDeposit";
             this.tbDeposit.Padding = new System.Windows.Forms.Padding(3);
-            this.tbDeposit.Size = new System.Drawing.Size(548, 313);
+            this.tbDeposit.Size = new System.Drawing.Size(558, 362);
             this.tbDeposit.TabIndex = 1;
             this.tbDeposit.Text = "tabPage2";
             // 
@@ -279,6 +281,7 @@
             this.btDepMake.TabIndex = 4;
             this.btDepMake.Text = "DEPOSIT";
             this.btDepMake.UseVisualStyleBackColor = true;
+            this.btDepMake.Click += new System.EventHandler(this.BtDepMake_Click);
             // 
             // lblDepMoney
             // 
@@ -317,14 +320,14 @@
             this.tbTransfer.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tbTransfer.Controls.Add(this.btTransferMake);
             this.tbTransfer.Controls.Add(this.lblTransMoney);
-            this.tbTransfer.Controls.Add(this.textBox3);
+            this.tbTransfer.Controls.Add(this.txtTransMoney);
             this.tbTransfer.Controls.Add(this.lblIBANRecv);
             this.tbTransfer.Controls.Add(this.txtIBANRecv);
             this.tbTransfer.Controls.Add(this.lblIBANSend);
             this.tbTransfer.Controls.Add(this.txtIBANSend);
             this.tbTransfer.Location = new System.Drawing.Point(4, 5);
             this.tbTransfer.Name = "tbTransfer";
-            this.tbTransfer.Size = new System.Drawing.Size(548, 313);
+            this.tbTransfer.Size = new System.Drawing.Size(558, 362);
             this.tbTransfer.TabIndex = 2;
             this.tbTransfer.Text = "tabPage1";
             // 
@@ -336,6 +339,7 @@
             this.btTransferMake.TabIndex = 6;
             this.btTransferMake.Text = "TRANSFER";
             this.btTransferMake.UseVisualStyleBackColor = true;
+            this.btTransferMake.Click += new System.EventHandler(this.BtTransferMake_Click);
             // 
             // lblTransMoney
             // 
@@ -346,12 +350,12 @@
             this.lblTransMoney.TabIndex = 5;
             this.lblTransMoney.Text = "MONEY";
             // 
-            // textBox3
+            // txtTransMoney
             // 
-            this.textBox3.Location = new System.Drawing.Point(150, 144);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(363, 26);
-            this.textBox3.TabIndex = 4;
+            this.txtTransMoney.Location = new System.Drawing.Point(150, 144);
+            this.txtTransMoney.Name = "txtTransMoney";
+            this.txtTransMoney.Size = new System.Drawing.Size(363, 26);
+            this.txtTransMoney.TabIndex = 4;
             // 
             // lblIBANRecv
             // 
@@ -455,7 +459,7 @@
         private System.Windows.Forms.Button btCreateMake;
         private System.Windows.Forms.Button btTransferMake;
         private System.Windows.Forms.Label lblTransMoney;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtTransMoney;
         private System.Windows.Forms.Label lblIBANRecv;
         private System.Windows.Forms.TextBox txtIBANRecv;
         private System.Windows.Forms.Label lblIBANSend;

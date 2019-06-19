@@ -89,14 +89,14 @@ namespace Bank
         }
 
         /// <summary>
-        /// create the user and the account
+        /// create the Client entry and the account entry
         /// </summary>
         /// <param name="name">Name of the client</param>
         /// <param name="surname">Surname of the client</param>
         /// <param name="telephone">Telephone of the client</param>
         /// <param name="email">Email of the client</param>
         /// <param name="iban">IBAN of the account</param>
-        public void createUser(String name, String surname, String telephone, String email, String iban)
+        public void createClient(String name, String surname, String telephone, String email, String iban)
         {
             try
             {
@@ -125,7 +125,11 @@ namespace Bank
 
             }
         }
-        
+        /// <summary>
+        /// Deposit money in an account
+        /// </summary>
+        /// <param name="Iban">IBAN of the account to deposit money</param>
+        /// <param name="money"></param>
         public void deposit(String Iban, float money)
         {
             try
@@ -149,7 +153,13 @@ namespace Bank
 
             }
         }
-
+        /// <summary>
+        /// Transfer money between two acccounts
+        /// </summary>
+        /// <param name="IbanSend">IBAN of the account that send money</param>
+        /// <param name="IbanRecv">IBAN of the account that receive money</param>
+        /// <param name="money">Money to transfer</param>
+        /// <returns></returns>
         public bool transfer(String IbanSend, String IbanRecv, float money)
         {
             try
