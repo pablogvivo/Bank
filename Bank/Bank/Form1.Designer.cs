@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btTransfer = new System.Windows.Forms.Button();
             this.btDeposit = new System.Windows.Forms.Button();
             this.btCreateClient = new System.Windows.Forms.Button();
@@ -60,16 +61,15 @@
             this.lblIBANSend = new System.Windows.Forms.Label();
             this.txtIBANSend = new System.Windows.Forms.TextBox();
             this.txtError = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tbMain.SuspendLayout();
             this.tbCreate.SuspendLayout();
             this.tbDeposit.SuspendLayout();
             this.tbTransfer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -93,6 +93,18 @@
             this.splitContainer1.Size = new System.Drawing.Size(723, 371);
             this.splitContainer1.SplitterDistance = 153;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox1.Image = global::Bank.Properties.Resources.Logo_green;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 251);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
+            this.pictureBox1.Size = new System.Drawing.Size(153, 120);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // btTransfer
             // 
@@ -413,18 +425,6 @@
             this.txtError.Size = new System.Drawing.Size(723, 26);
             this.txtError.TabIndex = 1;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox1.Image = global::Bank.Properties.Resources.Logo_green;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 251);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
-            this.pictureBox1.Size = new System.Drawing.Size(153, 120);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +443,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tbMain.ResumeLayout(false);
             this.tbCreate.ResumeLayout(false);
             this.tbCreate.PerformLayout();
@@ -450,7 +451,6 @@
             this.tbDeposit.PerformLayout();
             this.tbTransfer.ResumeLayout(false);
             this.tbTransfer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

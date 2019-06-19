@@ -116,7 +116,7 @@ namespace Bank
                 cmd.Parameters["email"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("iban", iban);
                 cmd.Parameters["iban"].Direction = System.Data.ParameterDirection.Input;
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
                 Close();
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace Bank
                 cmd.Parameters["ibannum"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("depmoney", money);
                 cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
                 Close();
             }
             catch (Exception ex)
@@ -176,7 +176,7 @@ namespace Bank
                 cmd.Parameters["ibanRecv"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("depmoney", money);
                 cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
-                MySqlDataReader rdr = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
                 Close(); 
                 return true;
             }
@@ -187,7 +187,33 @@ namespace Bank
 
             }
         }
+        public bool existIBAN(String Iban)
+        {
+            try
+            {
+                bool result=false;
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "existIBAN";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
+                cmd.Parameters.AddWithValue("ibannum", Iban);
+                cmd.Parameters["ibannum"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("result",result);
+                cmd.Parameters["result"].Direction = System.Data.ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+                Close();
+                result = Convert.ToBoolean(cmd.Parameters["result"].Value);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error making transfer " + ex.ToString());
+                return false;
+
+            }
+        }
         #endregion
     }
 }
