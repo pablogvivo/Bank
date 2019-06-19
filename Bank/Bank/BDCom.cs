@@ -20,6 +20,12 @@ namespace Bank
         {
             get => errors;
         }
+        public bool ClearErrors
+        {
+            set {
+                errors.Clear();
+            } 
+        }
 
         //////////////////////////////////
         //        CONSTRUCTORS          //
@@ -96,7 +102,7 @@ namespace Bank
         /// <param name="telephone">Telephone of the client</param>
         /// <param name="email">Email of the client</param>
         /// <param name="iban">IBAN of the account</param>
-        public void createClient(String name, String surname, String telephone, String email, String iban)
+        public bool createClient(String name, String surname, String telephone, String email, String iban)
         {
             try
             {
@@ -118,10 +124,12 @@ namespace Bank
                 cmd.Parameters["iban"].Direction = System.Data.ParameterDirection.Input;
                 cmd.ExecuteNonQuery();
                 Close();
+                return true;
             }
             catch (Exception ex)
             {
                 errors.Add("Error creating user " + ex.ToString());
+                return false;
 
             }
         }
@@ -130,7 +138,7 @@ namespace Bank
         /// </summary>
         /// <param name="Iban">IBAN of the account to deposit money</param>
         /// <param name="money"></param>
-        public void deposit(String Iban, float money)
+        public bool deposit(String Iban, float money)
         {
             try
             {
@@ -146,11 +154,12 @@ namespace Bank
                 cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
                 cmd.ExecuteNonQuery();
                 Close();
+                return true;
             }
             catch (Exception ex)
             {
                 errors.Add("Error making deposit " + ex.ToString());
-
+                return false;
             }
         }
         /// <summary>

@@ -59,10 +59,15 @@ namespace Bank
         {
             txtError.Text = "";
             if (TransGood == 0) {
-                if (Utils.notEmptyTextBox(tbTransfer.Controls))
-                    BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, float.Parse(txtDepMoney.Text));
+                if (Utils.notEmptyTextBox(tbTransfer.Controls)) {
+                    if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, float.Parse(txtDepMoney.Text)))
+                    {
+                        txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                        BBDD.ClearErrors = true;
+                    }
+                }
                 else
-                    txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
+                        txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
             }
             else
                 txtError.Text = "THERE IS AT LEAST ONE ERROR IN THE FIELDS";
@@ -73,9 +78,12 @@ namespace Bank
             txtError.Text = "";
             if (DepoGood == 0) {
                 if (Utils.notEmptyTextBox(tbDeposit.Controls))
-                    BBDD.deposit(txtDepIBAN.Text, float.Parse(txtDepMoney.Text));
-                else
-                    txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
+                    if (!BBDD.deposit(txtDepIBAN.Text, float.Parse(txtDepMoney.Text))) {
+                        txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                        BBDD.ClearErrors = true;
+                    }
+                    else
+                        txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
             }
             else
                 txtError.Text = "THERE IS AT LEAST ONE ERROR IN THE FIELDS";
@@ -88,8 +96,12 @@ namespace Bank
             txtError.Text = "";
             if (CreateGood == 0) {
                 if (Utils.notEmptyTextBox(tbCreate.Controls))
-                    BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text);
-                else
+                    if (!BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text)){
+                        txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                        BBDD.ClearErrors=true;
+                    }
+                        
+                    else
                     txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
             }
             else
