@@ -150,6 +150,34 @@ namespace Bank
             }
         }
 
+        public bool transfer(String IbanSend, String IbanRecv, float money)
+        {
+            try
+            {
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "transfer";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("ibanSend", IbanSend);
+                cmd.Parameters["ibanSend"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("ibanRecv", IbanRecv);
+                cmd.Parameters["ibanRecv"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("depmoney", money);
+                cmd.Parameters["depmoney"].Direction = System.Data.ParameterDirection.Input;
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                Close(); 
+                return true;
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error making transfer " + ex.ToString());
+                return false;
+
+            }
+        }
+
         #endregion
     }
 }
