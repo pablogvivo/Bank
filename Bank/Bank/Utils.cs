@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Windows.Forms;
+
 namespace Bank
 {
     class Utils
@@ -93,6 +95,21 @@ namespace Bank
             }
             catch (Exception ex)
             {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Check that all the TextBox in the Control are not Empty
+        /// </summary>
+        /// <param name="Father"></param>
+        /// <returns></returns>
+        public static bool notEmptyTextBox(Control.ControlCollection Father) {
+            try {
+                if (Father.OfType<TextBox>().Any(t => string.IsNullOrEmpty(t.Text)))
+                    return false; 
+                return true;
+            }
+            catch (Exception ex) {
                 return false;
             }
         }

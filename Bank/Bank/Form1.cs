@@ -13,6 +13,7 @@ namespace Bank
     public partial class Main : Form
     {
         BDCom BBDD;
+        Byte CreateGood = 5;
         public Main()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace Bank
         {
             BBDD = new BDCom("localhost", "client_conn", "client", "tyu567");
             btCreateClient.BackColor = Color.LawnGreen;
+
         }
         #region ButtonTab
         private void BtDeposit_Click(object sender, EventArgs e)
@@ -53,21 +55,28 @@ namespace Bank
         private void BtTransferMake_Click(object sender, EventArgs e)
         {
             txtError.Text = "";
-            float tempfloat = Utils.fNumber(txtTransMoney.Text);
-            if ( tempfloat != 0)
-
-                BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, tempfloat);
+            if (Utils.notEmptyTextBox(tbTransfer.Controls))
+                BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, 10);
             else
-                txtError.Text = "Money format incorrect or equal to zero";
+                txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
         }
         private void BtDepMake_Click(object sender, EventArgs e)
         {
-            BBDD.deposit(txtDepIBAN.Text, float.Parse(txtDepMoney.Text));
+            txtError.Text = "";
+            if (Utils.notEmptyTextBox(tbDeposit.Controls))
+                BBDD.deposit(txtDepIBAN.Text, float.Parse(txtDepMoney.Text));
+            else
+                txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
+            
         }
 
         private void BtCreateMake_Click(object sender, EventArgs e)
         {
-            BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text);
+            txtError.Text = "";
+            if (Utils.notEmptyTextBox(tbCreate.Controls))
+                BBDD.createClient(txtName.Text, txtSurname.Text, txtTelephone.Text, txtEmail.Text, txtIBAN.Text);
+            else
+                txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
         }
 
         #endregion
@@ -76,9 +85,9 @@ namespace Bank
         private void TxtIBAN_TextChanged(object sender, EventArgs e)
         {
             txtError.Text ="";
-            if (!Utils.IBANCheck(txtIBAN.Text)) {
+            if (!Utils.IBANCheck(txtIBAN.Text))
                 txtError.Text = "ERROR IN THE IBAN";
-            }  
+            
         }
 
         private void TxtName_TextChanged(object sender, EventArgs e)
@@ -86,6 +95,8 @@ namespace Bank
             txtError.Text = "";
             if (!Utils.justLetter(txtName.Text))
                 txtError.Text = "ERROR IN NAME";
+            
+                
         }
 
         private void TxtSurname_TextChanged(object sender, EventArgs e)
@@ -104,10 +115,9 @@ namespace Bank
         private void TxtDepIBAN_TextChanged(object sender, EventArgs e)
         {
             txtError.Text = "";
-            if (!Utils.IBANCheck(txtDepIBAN.Text))
-            {
+            if (!Utils.IBANCheck(txtDepIBAN.Text))            
                 txtError.Text = "ERROR IN DEPOSIT IBAN";
-            }
+            
         }
 
         private void TxtDepMoney_TextChanged(object sender, EventArgs e)
@@ -122,18 +132,15 @@ namespace Bank
         {
             txtError.Text = "";
             if (!Utils.IBANCheck(txtIBANSend.Text))
-            {
                 txtError.Text = "ERROR IN THE SEND IBAN";
-            }
+            
         }
 
         private void TxtIBANRecv_TextChanged(object sender, EventArgs e)
         {
             txtError.Text = "";
-            if (!Utils.IBANCheck(txtIBANRecv.Text))
-            {
+            if (!Utils.IBANCheck(txtIBANRecv.Text))            
                 txtError.Text = "ERROR IN THE RECEIVE IBAN";
-            }
         }
 
         private void TxtTransMoney_TextChanged(object sender, EventArgs e)
