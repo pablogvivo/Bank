@@ -4,7 +4,7 @@ Program develop as a test for a job
 
 ### Prerequisites
 
-Use BBDD.sql as a DataBase you can find it on the database folder.
+Use BBDD.sql as a DataBase you can find it on the main folder.
 
 
 
