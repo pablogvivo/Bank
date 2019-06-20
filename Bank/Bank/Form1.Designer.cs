@@ -47,6 +47,7 @@
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.tbDeposit = new System.Windows.Forms.TabPage();
+            this.CBDepIBAN = new System.Windows.Forms.ComboBox();
             this.btDepMake = new System.Windows.Forms.Button();
             this.lblDepMoney = new System.Windows.Forms.Label();
             this.lblDepIBAN = new System.Windows.Forms.Label();
@@ -61,6 +62,8 @@
             this.lblIBANSend = new System.Windows.Forms.Label();
             this.txtIBANSend = new System.Windows.Forms.TextBox();
             this.txtError = new System.Windows.Forms.TextBox();
+            this.CBSendIBAN = new System.Windows.Forms.ComboBox();
+            this.CBRecvIBAN = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -280,6 +283,7 @@
             // tbDeposit
             // 
             this.tbDeposit.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tbDeposit.Controls.Add(this.CBDepIBAN);
             this.tbDeposit.Controls.Add(this.btDepMake);
             this.tbDeposit.Controls.Add(this.lblDepMoney);
             this.tbDeposit.Controls.Add(this.lblDepIBAN);
@@ -291,6 +295,17 @@
             this.tbDeposit.Size = new System.Drawing.Size(558, 362);
             this.tbDeposit.TabIndex = 1;
             this.tbDeposit.Text = "tabPage2";
+            // 
+            // CBDepIBAN
+            // 
+            this.CBDepIBAN.FormattingEnabled = true;
+            this.CBDepIBAN.Location = new System.Drawing.Point(150, 14);
+            this.CBDepIBAN.Name = "CBDepIBAN";
+            this.CBDepIBAN.Size = new System.Drawing.Size(363, 28);
+            this.CBDepIBAN.TabIndex = 5;
+            this.CBDepIBAN.DropDown += new System.EventHandler(this.CBDepIBAN_DropDown);
+            this.CBDepIBAN.SelectedIndexChanged += new System.EventHandler(this.CBDepIBAN_SelectedIndexChanged);
+            this.CBDepIBAN.Click += new System.EventHandler(this.CBDepIBAN_Click);
             // 
             // btDepMake
             // 
@@ -305,7 +320,7 @@
             // lblDepMoney
             // 
             this.lblDepMoney.AutoSize = true;
-            this.lblDepMoney.Location = new System.Drawing.Point(73, 82);
+            this.lblDepMoney.Location = new System.Drawing.Point(73, 128);
             this.lblDepMoney.Name = "lblDepMoney";
             this.lblDepMoney.Size = new System.Drawing.Size(67, 20);
             this.lblDepMoney.TabIndex = 3;
@@ -314,7 +329,7 @@
             // lblDepIBAN
             // 
             this.lblDepIBAN.AutoSize = true;
-            this.lblDepIBAN.Location = new System.Drawing.Point(93, 17);
+            this.lblDepIBAN.Location = new System.Drawing.Point(93, 63);
             this.lblDepIBAN.Name = "lblDepIBAN";
             this.lblDepIBAN.Size = new System.Drawing.Size(47, 20);
             this.lblDepIBAN.TabIndex = 2;
@@ -322,7 +337,7 @@
             // 
             // txtDepMoney
             // 
-            this.txtDepMoney.Location = new System.Drawing.Point(150, 79);
+            this.txtDepMoney.Location = new System.Drawing.Point(150, 125);
             this.txtDepMoney.Name = "txtDepMoney";
             this.txtDepMoney.Size = new System.Drawing.Size(363, 26);
             this.txtDepMoney.TabIndex = 1;
@@ -330,7 +345,7 @@
             // 
             // txtDepIBAN
             // 
-            this.txtDepIBAN.Location = new System.Drawing.Point(150, 14);
+            this.txtDepIBAN.Location = new System.Drawing.Point(150, 60);
             this.txtDepIBAN.Name = "txtDepIBAN";
             this.txtDepIBAN.Size = new System.Drawing.Size(363, 26);
             this.txtDepIBAN.TabIndex = 0;
@@ -339,6 +354,8 @@
             // tbTransfer
             // 
             this.tbTransfer.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tbTransfer.Controls.Add(this.CBRecvIBAN);
+            this.tbTransfer.Controls.Add(this.CBSendIBAN);
             this.tbTransfer.Controls.Add(this.btTransferMake);
             this.tbTransfer.Controls.Add(this.lblTransMoney);
             this.tbTransfer.Controls.Add(this.txtTransMoney);
@@ -365,7 +382,7 @@
             // lblTransMoney
             // 
             this.lblTransMoney.AutoSize = true;
-            this.lblTransMoney.Location = new System.Drawing.Point(67, 147);
+            this.lblTransMoney.Location = new System.Drawing.Point(67, 219);
             this.lblTransMoney.Name = "lblTransMoney";
             this.lblTransMoney.Size = new System.Drawing.Size(67, 20);
             this.lblTransMoney.TabIndex = 5;
@@ -373,7 +390,7 @@
             // 
             // txtTransMoney
             // 
-            this.txtTransMoney.Location = new System.Drawing.Point(150, 144);
+            this.txtTransMoney.Location = new System.Drawing.Point(150, 216);
             this.txtTransMoney.Name = "txtTransMoney";
             this.txtTransMoney.Size = new System.Drawing.Size(363, 26);
             this.txtTransMoney.TabIndex = 4;
@@ -382,7 +399,7 @@
             // lblIBANRecv
             // 
             this.lblIBANRecv.AutoSize = true;
-            this.lblIBANRecv.Location = new System.Drawing.Point(11, 82);
+            this.lblIBANRecv.Location = new System.Drawing.Point(11, 154);
             this.lblIBANRecv.Name = "lblIBANRecv";
             this.lblIBANRecv.Size = new System.Drawing.Size(123, 20);
             this.lblIBANRecv.TabIndex = 3;
@@ -390,7 +407,7 @@
             // 
             // txtIBANRecv
             // 
-            this.txtIBANRecv.Location = new System.Drawing.Point(150, 79);
+            this.txtIBANRecv.Location = new System.Drawing.Point(150, 151);
             this.txtIBANRecv.Name = "txtIBANRecv";
             this.txtIBANRecv.Size = new System.Drawing.Size(363, 26);
             this.txtIBANRecv.TabIndex = 2;
@@ -399,7 +416,7 @@
             // lblIBANSend
             // 
             this.lblIBANSend.AutoSize = true;
-            this.lblIBANSend.Location = new System.Drawing.Point(38, 17);
+            this.lblIBANSend.Location = new System.Drawing.Point(38, 60);
             this.lblIBANSend.Name = "lblIBANSend";
             this.lblIBANSend.Size = new System.Drawing.Size(96, 20);
             this.lblIBANSend.TabIndex = 1;
@@ -407,7 +424,7 @@
             // 
             // txtIBANSend
             // 
-            this.txtIBANSend.Location = new System.Drawing.Point(150, 14);
+            this.txtIBANSend.Location = new System.Drawing.Point(150, 57);
             this.txtIBANSend.Name = "txtIBANSend";
             this.txtIBANSend.Size = new System.Drawing.Size(363, 26);
             this.txtIBANSend.TabIndex = 0;
@@ -424,6 +441,28 @@
             this.txtError.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtError.Size = new System.Drawing.Size(723, 26);
             this.txtError.TabIndex = 1;
+            // 
+            // CBSendIBAN
+            // 
+            this.CBSendIBAN.FormattingEnabled = true;
+            this.CBSendIBAN.Location = new System.Drawing.Point(150, 23);
+            this.CBSendIBAN.Name = "CBSendIBAN";
+            this.CBSendIBAN.Size = new System.Drawing.Size(363, 28);
+            this.CBSendIBAN.TabIndex = 7;
+            this.CBSendIBAN.DropDown += new System.EventHandler(this.CBSendIBAN_DropDown);
+            this.CBSendIBAN.SelectedIndexChanged += new System.EventHandler(this.CBSendIBAN_SelectedIndexChanged);
+            this.CBSendIBAN.Click += new System.EventHandler(this.CBSendIBAN_Click);
+            // 
+            // CBRecvIBAN
+            // 
+            this.CBRecvIBAN.FormattingEnabled = true;
+            this.CBRecvIBAN.Location = new System.Drawing.Point(150, 117);
+            this.CBRecvIBAN.Name = "CBRecvIBAN";
+            this.CBRecvIBAN.Size = new System.Drawing.Size(363, 28);
+            this.CBRecvIBAN.TabIndex = 8;
+            this.CBRecvIBAN.DropDown += new System.EventHandler(this.CBRecvIBAN_DropDown);
+            this.CBRecvIBAN.SelectedIndexChanged += new System.EventHandler(this.CBRecvIBAN_SelectedIndexChanged);
+            this.CBRecvIBAN.Click += new System.EventHandler(this.CBRecvIBAN_Click);
             // 
             // Main
             // 
@@ -491,6 +530,9 @@
         private System.Windows.Forms.Label lblIBANSend;
         private System.Windows.Forms.TextBox txtIBANSend;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox CBDepIBAN;
+        private System.Windows.Forms.ComboBox CBRecvIBAN;
+        private System.Windows.Forms.ComboBox CBSendIBAN;
     }
 }
 

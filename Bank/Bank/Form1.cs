@@ -13,6 +13,7 @@ namespace Bank
     public partial class Main : Form
     {
         BDCom BBDD;
+        List<Client> tempClient = new List<Client>();
         //If all the textbox are ok the value is zero
         Byte CreateGood = 0b0000_1111;
         Byte DepoGood = 0b0000_0011;
@@ -25,8 +26,7 @@ namespace Bank
         private void Form1_Load(object sender, EventArgs e)
         {
             BBDD = new BDCom("localhost", "client_conn", "client", "tyu567");
-            btCreateClient.BackColor = Color.LawnGreen;
-
+            btCreateClient.BackColor = Color.LawnGreen;  
         }
         #region ButtonTab
         private void BtDeposit_Click(object sender, EventArgs e)
@@ -62,23 +62,28 @@ namespace Bank
             txtError.Text = "";
             if (TransGood == 0) {
                 if (Utils.notEmptyTextBox(tbTransfer.Controls)) {
-                    if(tempMoney > 0){
-                        if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, Utils.fNumber(txtTransMoney.Text)))
+                    if (txtIBANRecv.Text != txtIBANSend.Text) {
+                        if (tempMoney > 0)
                         {
-                            if (BBDD.Errors.Count > 0)
+                            if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, Utils.fNumber(txtTransMoney.Text)))
                             {
-                                txtError.Text = BBDD.Errors[BBDD.Errors.Count];
-                                BBDD.ClearErrors = true;
+                                if (BBDD.Errors.Count > 0)
+                                {
+                                    txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                                    BBDD.ClearErrors = true;
+                                }
+                            }
+                            else
+                            {
+                                Utils.resetTextbox(tbTransfer.Controls);
+                                txtError.Text = "DONE";
                             }
                         }
                         else
-                        {
-                            Utils.resetTextbox(tbTransfer.Controls);
-                            txtError.Text = "DONE";
-                        }
+                            txtError.Text = "MONEY MUST BE GREATER THAN 0";
                     }
                     else
-                        txtError.Text = "MONEY MUST BE GREATER THAN 0";
+                        txtError.Text = "THE  IBANs CANT BE THE SAME";
                 }
                 else
                         txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
@@ -308,6 +313,73 @@ namespace Bank
 
         }
 
+
+        #endregion
+
+        #region ComboBox
+        private void CBDepIBAN_Click(object sender, EventArgs e)
+        {
+            CBDepIBAN.DroppedDown = true;
+        }
+        private void CBDepIBAN_DropDown(object sender, EventArgs e)
+        {
+            CBDepIBAN.Items.Clear();
+            tempClient.Clear();
+            tempClient = BBDD.listClient();
+            List<String> tempString = new List<string>();
+            foreach (Client d in tempClient) {
+                tempString.Add(d.Name + " " +d.Surname);
+            }
+            CBDepIBAN.Items.AddRange(tempString.ToArray());
+        }
+
+        private void CBSendIBAN_Click(object sender, EventArgs e)
+        {
+            CBSendIBAN.DroppedDown = true;
+        }
+
+        private void CBRecvIBAN_Click(object sender, EventArgs e)
+        {
+            CBRecvIBAN.DroppedDown = true;
+        }
+
+        private void CBSendIBAN_DropDown(object sender, EventArgs e)
+        {
+            CBSendIBAN.Items.Clear();
+            tempClient.Clear();
+            tempClient = BBDD.listClient();
+            List<String> tempString = new List<string>();
+            foreach (Client d in tempClient)
+            {
+                tempString.Add(d.Name + " " + d.Surname);
+            }
+            CBSendIBAN.Items.AddRange(tempString.ToArray());
+        }
+
+        private void CBRecvIBAN_DropDown(object sender, EventArgs e)
+        {
+            CBRecvIBAN.Items.Clear();
+            tempClient.Clear();
+            tempClient = BBDD.listClient();
+            List<String> tempString = new List<string>();
+            foreach (Client d in tempClient)
+            {
+                tempString.Add(d.Name + " " + d.Surname);
+            }
+            CBRecvIBAN.Items.AddRange(tempString.ToArray());
+        }
+        private void CBDepIBAN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtDepIBAN.Text = BBDD.IBANfromID(tempClient[CBDepIBAN.SelectedIndex].ID);
+        }
+        private void CBSendIBAN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtIBANSend.Text = BBDD.IBANfromID(tempClient[CBSendIBAN.SelectedIndex].ID);
+        }
+        private void CBRecvIBAN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtIBANRecv.Text = BBDD.IBANfromID(tempClient[CBRecvIBAN.SelectedIndex].ID);
+        }
         #endregion
 
 

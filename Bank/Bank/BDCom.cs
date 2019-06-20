@@ -235,6 +235,61 @@ namespace Bank
 
             }
         }
+
+        public String IBANfromID(int ID)
+        {
+            try
+            {
+                String result = "";
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "IBANfromid";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("id", ID);
+                cmd.Parameters["id"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("result", result);
+                cmd.Parameters["result"].Direction = System.Data.ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+                Close();
+                result = Convert.ToString(cmd.Parameters["result"].Value);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error searching ID " + ex.ToString());
+                return "";
+
+            }
+        }
+        public List<Client> listClient()
+        {
+            try
+            {
+                List<Client> result = new List<Client>();
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "Listclient";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                MySqlDataReader rd = cmd.ExecuteReader();
+                
+                while (rd.Read()) {
+                    result.Add(new Client(rd["name"].ToString(), rd["surname"].ToString(), Convert.ToInt32(rd["idclient"])));
+                }
+                Close();
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error making transfer " + ex.ToString());
+                return null;
+
+            }
+        }
         #endregion
     }
 }
