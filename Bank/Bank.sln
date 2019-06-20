@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank", "Bank\Bank.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankUnitTest", "BankUnitTest\BankUnitTest.csproj", "{DC4D13AD-6F38-4731-A287-0B45167B39A9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BBDD", "BBDD", "{8A8F4C23-A28B-4F0B-B46F-0B3BB6D88C72}"
+	ProjectSection(SolutionItems) = preProject
+		E:\descargas\BBDD.sql = E:\descargas\BBDD.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
