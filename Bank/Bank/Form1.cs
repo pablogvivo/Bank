@@ -57,21 +57,28 @@ namespace Bank
         #region Button BBDD
         private void BtTransferMake_Click(object sender, EventArgs e)
         {
+            float tempMoney = 0;
+            float.TryParse(txtTransMoney.Text.Replace(".",","), out tempMoney);
             txtError.Text = "";
             if (TransGood == 0) {
                 if (Utils.notEmptyTextBox(tbTransfer.Controls)) {
-                    if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, Utils.fNumber(txtTransMoney.Text)))
-                    {
-                        if (BBDD.Errors.Count > 0) {
-                            txtError.Text = BBDD.Errors[BBDD.Errors.Count];
-                            BBDD.ClearErrors = true;
+                    if(tempMoney > 0){
+                        if (!BBDD.transfer(txtIBANSend.Text, txtIBANRecv.Text, Utils.fNumber(txtTransMoney.Text)))
+                        {
+                            if (BBDD.Errors.Count > 0)
+                            {
+                                txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                                BBDD.ClearErrors = true;
+                            }
+                        }
+                        else
+                        {
+                            Utils.resetTextbox(tbTransfer.Controls);
+                            txtError.Text = "DONE";
                         }
                     }
                     else
-                    {
-                        Utils.resetTextbox(tbTransfer.Controls);
-                        txtError.Text = "DONE";
-                    }
+                        txtError.Text = "MONEY MUST BE GREATER THAN 0";
                 }
                 else
                         txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
@@ -83,7 +90,7 @@ namespace Bank
         private void BtDepMake_Click(object sender, EventArgs e)
         {
             float tempMoney=0;
-            float.TryParse(txtDepMoney.Text, out tempMoney);
+            float.TryParse(txtDepMoney.Text.Replace(".", ","), out tempMoney);
             txtError.Text = "";
             if (DepoGood == 0) {
                 if (Utils.notEmptyTextBox(tbDeposit.Controls)) {
