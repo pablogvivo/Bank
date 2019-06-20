@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Bank
 {
-    class Utils
+    public class Utils
     {
         /// <summary>
         /// Parese an string to a float number
