@@ -32,7 +32,7 @@ namespace Bank
         private void BtDeposit_Click(object sender, EventArgs e)
         {
             //CHANGING BETWEEN TABS
-            btTransfer.BackColor = btCreateClient.BackColor = Color.LightGray;
+            btTransaction.BackColor = btTransfer.BackColor = btCreateClient.BackColor = Color.LightGray;
             btDeposit.BackColor = Color.LawnGreen;
             tbMain.SelectedTab = tbDeposit;
 
@@ -40,7 +40,7 @@ namespace Bank
         private void BtCreateClient_Click(object sender, EventArgs e)
         {
             //CHANGING BETWEEN TABS
-            btTransfer.BackColor = btDeposit.BackColor =  Color.LightGray;
+            btTransaction.BackColor = btTransfer.BackColor = btDeposit.BackColor =  Color.LightGray;
             btCreateClient.BackColor = Color.LawnGreen;
             tbMain.SelectedTab = tbCreate;
         }
@@ -48,9 +48,15 @@ namespace Bank
         private void BtTransfer_Click(object sender, EventArgs e)
         {
             //CHANGING BETWEEN TABS
-            btDeposit.BackColor = btCreateClient.BackColor = Color.LightGray;
+            btTransaction.BackColor = btDeposit.BackColor = btCreateClient.BackColor = Color.LightGray;
             btTransfer.BackColor = Color.LawnGreen;
             tbMain.SelectedTab = tbTransfer;
+        }
+        private void BtTransaction_Click(object sender, EventArgs e)
+        {
+            btTransfer.BackColor = btDeposit.BackColor = btCreateClient.BackColor = Color.LightGray;
+            btTransaction.BackColor = Color.LawnGreen;
+            tbMain.SelectedTab = tbTrans;
         }
         #endregion
 
@@ -380,8 +386,29 @@ namespace Bank
         {
             txtIBANRecv.Text = BBDD.IBANfromID(tempClient[CBRecvIBAN.SelectedIndex].ID);
         }
+
         #endregion
 
-
+        private void CBTransaction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            DTTransaction.DataSource= Utils.ConvertListToDataTable(BBDD.listTransaction(tempClient[CBTransaction.SelectedIndex].ID));
+        }
+        private void CBTransaction_Click(object sender, EventArgs e)
+        {
+            CBTransaction.DroppedDown = true;
+        }
+        private void CBTransaction_DropDown(object sender, EventArgs e)
+        {
+            CBTransaction.Items.Clear();
+            tempClient.Clear();
+            tempClient = BBDD.listClient();
+            List<String> tempString = new List<string>();
+            foreach (Client d in tempClient)
+            {
+                tempString.Add(d.Name + " " + d.Surname);
+            }
+            CBTransaction.Items.AddRange(tempString.ToArray());
+        }
     }
 }

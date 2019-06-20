@@ -290,6 +290,38 @@ namespace Bank
 
             }
         }
+        public List<Transaction> listTransaction(int id)
+        {
+            try
+            {
+                int accnum2 = 0;
+                List<Transaction> result = new List<Transaction>();
+                Connect();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "listTrans";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.Parameters["id"].Direction = System.Data.ParameterDirection.Input;
+
+                MySqlDataReader rd = cmd.ExecuteReader();
+
+                while (rd.Read())
+                {
+                    int.TryParse(rd["accnum2"].ToString(), out accnum2);
+                    result.Add(new Transaction(Convert.ToInt32(rd["idtransaction"]), Convert.ToInt32(rd["accnum"]), accnum2, Convert.ToSingle(rd["transamount"])));
+                }
+                Close();
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                errors.Add("Error making transfer " + ex.ToString());
+                return null;
+
+            }
+        }
         #endregion
     }
 }

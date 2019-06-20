@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data;
 using System.Windows.Forms;
 
 namespace Bank
@@ -122,6 +122,33 @@ namespace Bank
             catch (Exception ex)
             {
             }
+        }
+
+        public static DataTable ConvertListToDataTable(List<Transaction> list)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+
+                // Add columns.
+                foreach (System.Reflection.PropertyInfo d in typeof(Transaction).GetProperties())
+                {
+                    table.Columns.Add(d.Name);
+                }
+
+                // Add rows.
+                foreach (Transaction array in list)
+                {
+                    table.Rows.Add(array.ID, array.Accnum, array.Accnum2, array.Transamount);
+                }
+
+                return table;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
     }
 }

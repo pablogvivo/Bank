@@ -64,6 +64,10 @@
             this.txtError = new System.Windows.Forms.TextBox();
             this.CBSendIBAN = new System.Windows.Forms.ComboBox();
             this.CBRecvIBAN = new System.Windows.Forms.ComboBox();
+            this.tbTrans = new System.Windows.Forms.TabPage();
+            this.btTransaction = new System.Windows.Forms.Button();
+            this.CBTransaction = new System.Windows.Forms.ComboBox();
+            this.DTTransaction = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -73,6 +77,8 @@
             this.tbCreate.SuspendLayout();
             this.tbDeposit.SuspendLayout();
             this.tbTransfer.SuspendLayout();
+            this.tbTrans.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DTTransaction)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -83,6 +89,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btTransaction);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel1.Controls.Add(this.btTransfer);
             this.splitContainer1.Panel1.Controls.Add(this.btDeposit);
@@ -115,9 +122,9 @@
             this.btTransfer.Dock = System.Windows.Forms.DockStyle.Top;
             this.btTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTransfer.Location = new System.Drawing.Point(0, 130);
+            this.btTransfer.Location = new System.Drawing.Point(0, 100);
             this.btTransfer.Name = "btTransfer";
-            this.btTransfer.Size = new System.Drawing.Size(153, 65);
+            this.btTransfer.Size = new System.Drawing.Size(153, 50);
             this.btTransfer.TabIndex = 2;
             this.btTransfer.Text = "TRANSFER";
             this.btTransfer.UseVisualStyleBackColor = false;
@@ -129,9 +136,9 @@
             this.btDeposit.Dock = System.Windows.Forms.DockStyle.Top;
             this.btDeposit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btDeposit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btDeposit.Location = new System.Drawing.Point(0, 65);
+            this.btDeposit.Location = new System.Drawing.Point(0, 50);
             this.btDeposit.Name = "btDeposit";
-            this.btDeposit.Size = new System.Drawing.Size(153, 65);
+            this.btDeposit.Size = new System.Drawing.Size(153, 50);
             this.btDeposit.TabIndex = 1;
             this.btDeposit.Text = "DEPOSIT";
             this.btDeposit.UseVisualStyleBackColor = false;
@@ -145,7 +152,7 @@
             this.btCreateClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCreateClient.Location = new System.Drawing.Point(0, 0);
             this.btCreateClient.Name = "btCreateClient";
-            this.btCreateClient.Size = new System.Drawing.Size(153, 65);
+            this.btCreateClient.Size = new System.Drawing.Size(153, 50);
             this.btCreateClient.TabIndex = 0;
             this.btCreateClient.Text = "CREATE CLIENT";
             this.btCreateClient.UseVisualStyleBackColor = false;
@@ -157,6 +164,7 @@
             this.tbMain.Controls.Add(this.tbCreate);
             this.tbMain.Controls.Add(this.tbDeposit);
             this.tbMain.Controls.Add(this.tbTransfer);
+            this.tbMain.Controls.Add(this.tbTrans);
             this.tbMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbMain.ItemSize = new System.Drawing.Size(0, 1);
             this.tbMain.Location = new System.Drawing.Point(0, 0);
@@ -464,6 +472,50 @@
             this.CBRecvIBAN.SelectedIndexChanged += new System.EventHandler(this.CBRecvIBAN_SelectedIndexChanged);
             this.CBRecvIBAN.Click += new System.EventHandler(this.CBRecvIBAN_Click);
             // 
+            // tbTrans
+            // 
+            this.tbTrans.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tbTrans.Controls.Add(this.DTTransaction);
+            this.tbTrans.Controls.Add(this.CBTransaction);
+            this.tbTrans.Location = new System.Drawing.Point(4, 5);
+            this.tbTrans.Name = "tbTrans";
+            this.tbTrans.Size = new System.Drawing.Size(558, 362);
+            this.tbTrans.TabIndex = 3;
+            this.tbTrans.Text = "tabPage1";
+            // 
+            // btTransaction
+            // 
+            this.btTransaction.BackColor = System.Drawing.SystemColors.Control;
+            this.btTransaction.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTransaction.Location = new System.Drawing.Point(0, 150);
+            this.btTransaction.Name = "btTransaction";
+            this.btTransaction.Size = new System.Drawing.Size(153, 50);
+            this.btTransaction.TabIndex = 4;
+            this.btTransaction.Text = "TRANSACTION";
+            this.btTransaction.UseVisualStyleBackColor = false;
+            this.btTransaction.Click += new System.EventHandler(this.BtTransaction_Click);
+            // 
+            // CBTransaction
+            // 
+            this.CBTransaction.FormattingEnabled = true;
+            this.CBTransaction.Location = new System.Drawing.Point(249, 7);
+            this.CBTransaction.Name = "CBTransaction";
+            this.CBTransaction.Size = new System.Drawing.Size(301, 28);
+            this.CBTransaction.TabIndex = 0;
+            this.CBTransaction.DropDown += new System.EventHandler(this.CBTransaction_DropDown);
+            this.CBTransaction.SelectedIndexChanged += new System.EventHandler(this.CBTransaction_SelectedIndexChanged);
+            this.CBTransaction.Click += new System.EventHandler(this.CBTransaction_Click);
+            // 
+            // DTTransaction
+            // 
+            this.DTTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DTTransaction.Location = new System.Drawing.Point(3, 44);
+            this.DTTransaction.Name = "DTTransaction";
+            this.DTTransaction.Size = new System.Drawing.Size(547, 290);
+            this.DTTransaction.TabIndex = 1;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,6 +542,8 @@
             this.tbDeposit.PerformLayout();
             this.tbTransfer.ResumeLayout(false);
             this.tbTransfer.PerformLayout();
+            this.tbTrans.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DTTransaction)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -533,6 +587,10 @@
         private System.Windows.Forms.ComboBox CBDepIBAN;
         private System.Windows.Forms.ComboBox CBRecvIBAN;
         private System.Windows.Forms.ComboBox CBSendIBAN;
+        private System.Windows.Forms.Button btTransaction;
+        private System.Windows.Forms.TabPage tbTrans;
+        private System.Windows.Forms.ComboBox CBTransaction;
+        private System.Windows.Forms.DataGridView DTTransaction;
     }
 }
 

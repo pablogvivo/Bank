@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bank
 {
-    class Client
+    public class Client
     {
         private String _name, _surname;
         private int _id;
