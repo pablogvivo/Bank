@@ -106,6 +106,7 @@ namespace Bank
         {
             try
             {
+                bool result = false;
                 Connect();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = connection;
@@ -122,9 +123,12 @@ namespace Bank
                 cmd.Parameters["email"].Direction = System.Data.ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("iban", iban);
                 cmd.Parameters["iban"].Direction = System.Data.ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("result", result);
+                cmd.Parameters["result"].Direction = System.Data.ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
                 Close();
-                return true;
+                result = Convert.ToBoolean(cmd.Parameters["result"].Value);
+                return result;
             }
             catch (Exception ex)
             {

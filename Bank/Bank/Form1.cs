@@ -82,19 +82,25 @@ namespace Bank
         }
         private void BtDepMake_Click(object sender, EventArgs e)
         {
+            float tempMoney=0;
+            float.TryParse(txtDepMoney.Text, out tempMoney);
             txtError.Text = "";
             if (DepoGood == 0) {
                 if (Utils.notEmptyTextBox(tbDeposit.Controls)) {
-                    if (!BBDD.deposit(txtDepIBAN.Text, Utils.fNumber(txtDepMoney.Text)))
-                    {
-                        txtError.Text = BBDD.Errors[BBDD.Errors.Count];
-                        BBDD.ClearErrors = true;
+                    if (tempMoney > 0){
+                        if (!BBDD.deposit(txtDepIBAN.Text, Utils.fNumber(txtDepMoney.Text)))
+                        {
+                            txtError.Text = BBDD.Errors[BBDD.Errors.Count];
+                            BBDD.ClearErrors = true;
+                        }
+                        else
+                        {
+                            Utils.resetTextbox(tbDeposit.Controls);
+                            txtError.Text = "DONE";
+                        }
                     }
-                    else {
-                        Utils.resetTextbox(tbDeposit.Controls);
-                        txtError.Text = "DONE";
-                    }
-                        
+                    else
+                        txtError.Text = "MONEY MUST BE GREATER THAN 0";
                 }
                 else
                         txtError.Text = "PLEASE INTRODUCE THE DATA IN ALL THE FIELDS";
@@ -200,16 +206,20 @@ namespace Bank
             txtError.Text = "";
             txtDepIBAN.BackColor = Color.White;
 
-            if (!Utils.IBANCheck(txtDepIBAN.Text))
-            {
+            if (!Utils.IBANCheck(txtDepIBAN.Text)){
                 txtDepIBAN.BackColor = Color.IndianRed;
                 txtError.Text = "ERROR IN DEPOSIT IBAN";
                 DepoGood |= 0b0000_0001;
             }
-            else
-                DepoGood &= 0b1111_1110;
-
-
+            else{
+                if (!BBDD.existIBAN(txtDepIBAN.Text)){
+                    txtDepIBAN.BackColor = Color.IndianRed;
+                    txtError.Text = " IBAN NOT IN THE DATABASE";
+                    DepoGood |= 0b0000_0001;
+                }
+                else
+                    DepoGood &= 0b1111_1110;
+            }
         }
 
         private void TxtDepMoney_TextChanged(object sender, EventArgs e)
@@ -239,8 +249,16 @@ namespace Bank
                 txtIBANSend.BackColor = Color.IndianRed;
                 txtError.Text = "ERROR IN THE SEND IBAN";
             }
-            else
-                TransGood &= 0b1111_1110;
+            else {
+                if (!BBDD.existIBAN(txtIBANSend.Text))
+                {
+                    txtIBANSend.BackColor = Color.IndianRed;
+                    txtError.Text = "SEND IBAN NOT IN THE DATABASE";
+                    TransGood |= 0b0000_0001;
+                }
+                else
+                    TransGood &= 0b1111_1110;
+            }
         }
 
         private void TxtIBANRecv_TextChanged(object sender, EventArgs e)
@@ -254,9 +272,16 @@ namespace Bank
                 txtError.Text = "ERROR IN THE RECEIVE IBAN";
                 TransGood |= 0b0000_0010;
             }
-            else
-                TransGood &= 0b1111_1101;
-
+            else {
+                if (!BBDD.existIBAN(txtIBANRecv.Text))
+                {
+                    txtIBANRecv.BackColor = Color.IndianRed;
+                    txtError.Text = "RECEIVE IBAN NOT IN THE DATABASE";
+                    TransGood |= 0b0000_0001;
+                }
+                else
+                    TransGood &= 0b1111_1101;
+            }
         }
 
         private void TxtTransMoney_TextChanged(object sender, EventArgs e)
