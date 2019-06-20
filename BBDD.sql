@@ -91,7 +91,7 @@ CREATE TABLE `transaction` (
   KEY `idaccount_idx` (`accnum`),
   CONSTRAINT `idaccount` FOREIGN KEY (`accnum`) REFERENCES `account` (`idaccount`),
   CONSTRAINT `idtranstype` FOREIGN KEY (`transtype`) REFERENCES `transtype` (`idtranstype`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,1,NULL,1,6000),(2,2,NULL,1,800.5),(3,3,NULL,1,13000),(4,6,NULL,1,1300),(5,7,NULL,1,86000),(6,7,2,1,50.5);
+INSERT INTO `transaction` VALUES (1,1,NULL,1,6000),(2,2,NULL,1,800.5),(3,3,NULL,1,13000),(4,6,NULL,1,1300),(5,7,NULL,1,86000),(6,7,2,1,50.5),(7,1,1,1,20);
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,6 +191,48 @@ SET result = 0;
 IF(EXISTS(SELECT iban FROM client_conn.account WHERE iban = ibannum)) then  
     SET result = 1; 
 END IF; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `IBANfromid` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`client`@`%` PROCEDURE `IBANfromid`(IN id int, OUT result varchar(34))
+BEGIN
+   SELECT iban
+   INTO result
+   FROM client_conn.account
+   WHERE cod_client = id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Listclient` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`client`@`%` PROCEDURE `Listclient`()
+BEGIN
+   SELECT name, surname, idclient
+   FROM client_conn.client;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -288,4 +330,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-20 10:01:12
+-- Dump completed on 2019-06-20 11:17:53
